@@ -1,0 +1,56 @@
+select clients. first_name, clients.last_name, billing.amount, billing.charged_datetime
+from clients
+join billing on clients.id = billing.clients_id;
+
+select sites.domain_name, leads.first_name, leads.last_name from sites join leads on sites.id=leads.sites_id;
+
+select clients.first_name as client_frist_name, clients.last_name, sites.domain_name, leads.first_name as lead_frist_name
+from clients
+join sites on clients.id = sites.clients_id
+join leads on sites.id=leads.sites_id;
+
+select clients.first_name,  clients.last_name, sites.domain_name from clients
+left join sites on clients.id= sites.clients_id;
+
+select clients. first_name, clients.last_name, sum(billing.amount)
+from clients
+join billing on clients.id = billing.clients_id
+group by clients.id;
+
+select group_concat(' ', sites.domain_name) as domain_name, clients.first_name, clients.last_name
+from clients
+join sites on clients.id=sites.clients_id
+group by clients.id;
+
+select count(leads.id), sites.domain_name
+from sites
+join leads on sites.id= leads.sites_id
+group by sites.id; 
+
+
+
+
+use twitter;
+#select * from users where id=1 or id =2
+#order by birthday 
+#select *from faves;
+#select *from follows;
+#select * from tweets;
+#select * from users where id>2;
+#select * from users where id<=3;
+#select * from users where first_name like '%e'; 
+#select * from users where first_name like 'K%';
+#select * from users where first_name not like 'K%';
+#select * from users where first_name like '%e' order by birthday desc;
+##select first_name from users order by first_name; 
+#select * from users limit 3;
+#select * from users limit 3 offset 2; #te njejta 
+#SELECT *FROM users LIMIT 2,3; #te njejta
+ #select * from tweets;
+ #insert into tweets (tweet, user_id, created_at, updated_at)    # insert
+ #values ("hello", 2, now(), now());                              # insert
+  #select * from users;
+  #update twitter.users set first_name='Kobe SR' where id=1;
+ #select * from tweets;
+ #delete from tweets where id=13; 
+ select *from tweets;
