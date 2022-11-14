@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Checkerboard</h1>
+    <table>
+        <tbody>
+            {%for i in range (0, row)%}
+            {% if (i+1)%2==0 %}
+            <tr>
+                {% for i in range (0, col)%}
+                {% if (i+1)%2==0 %}
+                <td style="height: 100px; width: 100px; background-color: {{color1}};">
+                </td>
+                {% else  %}
+                <td style="height: 100px; width: 100px; background-color: {{color2}};">
+                </td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            {% else %}
+            <tr>
+                {% for i in range (0, col)%}
+                {% if (i+1)%2==0 %}
+                <td style="height: 100px; width: 100px; background-color: {{color2}};">
+                </td>
+                {% else  %}
+                <td style="height: 100px; width: 100px; background-color: {{color1}};">
+                </td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
