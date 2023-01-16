@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Book Club</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/dashboard.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/cssTemplate/bootstrap.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/cssTemplate/templatemo.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/cssTemplate/custom.css') }}">
+
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/cssTemplate/fontawesome.min.css') }}">
+
+<!--
+    
+TemplateMo 559 Zay Shop
+
+https://templatemo.com/tm-559-zay-shop
+
+-->
+</head>
+
+<body>
+    <!-- Start Top Nav -->
+    
+    <!-- Close Top Nav -->
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-white logo h1 align-self-center" href="/">
+                Welcome {{user.first_name}}
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        
+                        <li class="nav-item">
+                            
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar align-self-center d-flex">                  
+                        <a class="nav-link btn btn-danger" href="/logout">Logout</a>
+                    
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->
+
+    <!-- Modal -->
+    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="w-100 pt-1 mb-5 text-right">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                    <button type="submit" class="input-group-text bg-success text-light">
+                        <i class="fa fa-fw fa-search text-white"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+
+    <!-- Start Banner Hero -->
+
+    <!-- Start Featured Product -->
+    <section class="bg-light">
+        <div class="container py-5">
+            <div class="row text-center py-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">Featured Books</h1>
+                </div>
+            </div>
+            <div class="row">
+                {% for book in books %}
+                <div class="col-12 col-md-4 mb-4">
+                   
+                    <div class="card h-100">
+                        <a href="/book/{{book.id}}">
+                            <img class="card-img-top imageHeight" src="/static/img/IMAGE_UPLOADS/{{book.image}}" alt="Profile Picture">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                
+                                <li class="text-muted text-right">
+                                    {% if book.id in userLikedBooks %}
+                                    <p>This is one of your favorites</p>
+                                    {% else %}
+                                    <a href="/like/{{book.id}}">Add to favorites</a>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                            <a href="/book/{{book.id}}" class="h2 text-decoration-none text-dark">{{book.title}}</a>
+                            <p class="card-text">
+                                {{book.description}}
+                            </p>
+                            <p class="text-muted">( added by {{book.creator_name}} {{book.creator_lastname}})</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    <!-- End Featured Product -->
+    <div>
+        <form class="w-50 m-auto" action="/createBook" method="post" enctype="multipart/form-data">
+            <h1>Add a new Book</h1>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="Book Title">
+            </div>
+            <div>
+            {% with messages = get_flashed_messages(category_filter=["title"]) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-danger text-center">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </div>
+            <div class="form-group mt-2">
+                <label for="description">Description</label>
+                <textarea name="description" class="form-control" cols="30" rows="5"></textarea>
+            </div>
+            <div>
+            
+                {% with messages = get_flashed_messages(category_filter=["description"]) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-danger text-center">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </div>
+            <div class="form-group">
+                <label for="image">Book Image:</label>
+                <input type="file" name="image">
+            </div>
+            <div>
+            
+                {% with messages = get_flashed_messages(category_filter=["image"]) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-danger text-center">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </div>
+            <input type="submit" class="btn btn-success mt-3" value="Add">
+        </form>
+    </div>
+    <!-- Start Script -->
+    <script src="flask_app/static/bootstrap-5.3.0-alpha1-dist/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='/js/jquery-1.11.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/js/jquery-migrate-1.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/js/bootstrap.bundle.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/js/templatemo.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='/js/custom.js') }}"></script>
+
+    <!-- End Script -->
+</body>
+
+</html>

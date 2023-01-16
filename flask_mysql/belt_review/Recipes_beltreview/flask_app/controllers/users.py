@@ -20,8 +20,8 @@ def logout():
 
 @app.route('/loginPage')
 def loginPage():
-    if 'user_id' in session:
-        return redirect('/')
+    if 'user_id' in session: #check is someone is logedin
+        return redirect('/') #if we return the functinon ends so we dont need a else there 
     return render_template('loginRegister.html')
 
 

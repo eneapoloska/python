@@ -1,0 +1,13 @@
+.bookImage{
+	width: 100px;
+	height: auto;
+}
+.bookTitle{
+	font-size: 22px;
+	text-decoration: none;	
+}
+
+.imageHeight{
+    height: 400px!important;
+    object-fit: contain;
+}

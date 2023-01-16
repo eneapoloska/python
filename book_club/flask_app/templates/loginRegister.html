@@ -39,7 +39,7 @@
                     <input type="text" class="form-control" name="last_name">
                 </div>
                 <div>
-                    {% with messages = get_flashed_messages(category_filter=["lastname"]) %}
+                {% with messages = get_flashed_messages(category_filter=["lastname"]) %}
                     {% if messages %}
                         {% for message in messages %}
                             <p class="text-danger">{{message}}</p>
@@ -52,7 +52,7 @@
                     <input type="email" class="form-control" name="email">
                 </div>
                 <div>
-                    {% with messages = get_flashed_messages(category_filter=["emailSignUp"]) %}
+                {% with messages = get_flashed_messages(category_filter=["emailSignUp"]) %}
                     {% if messages %}
                         {% for message in messages %}
                             <p class="text-danger">{{message}}</p>
@@ -65,7 +65,7 @@
                     <input type="password" class="form-control" name="password">
                 </div>
                 <div>
-                    {% with messages = get_flashed_messages(category_filter=["passwordRegister"]) %}
+                {% with messages = get_flashed_messages(category_filter=["passwordRegister"]) %}
                     {% if messages %}
                         {% for message in messages %}
                             <p class="text-danger">{{message}}</p>
@@ -78,7 +78,7 @@
                     <input type="password" class="form-control" name="confirmpassword">
                 </div>
                 <div>
-                    {% with messages = get_flashed_messages(category_filter=["passwordConfirm"]) %}
+                {% with messages = get_flashed_messages(category_filter=["passwordConfirm"]) %}
                     {% if messages %}
                         {% for message in messages %}
                             <p class="text-danger">{{message}}</p>
@@ -105,7 +105,7 @@
                             <p class="text-danger">{{message}}</p>
                         {% endfor %}
                     {% endif %}
-                {% endwith %}
+                    {% endwith %}
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
@@ -118,7 +118,7 @@
                             <p class="text-danger">{{message}}</p>
                         {% endfor %}
                     {% endif %}
-                {% endwith %}
+                    {% endwith %}
                 </div>
                 <input class="btn btn-primary" type="submit" value="Log in">
             </form>
